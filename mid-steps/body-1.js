@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Table, Button } from 'react-bootstrap'
 import { BooksHeaders } from '../constants/books-headers'
 import BookForm from './base/form'
-import { IndexedDbWrapper } from '../utils/indexeddb'
 
 class Body extends Component {
 
@@ -54,10 +53,8 @@ class Body extends Component {
     onSubmit = (formData) => {
         let { booksData} = this.state
         let newBooksData = [ ...booksData ]
-        IndexedDbWrapper.update('books', formData, (data) => {
-            newBooksData.push(formData)
-            this.setState({ booksData: newBooksData })
-        })
+        newBooksData.push(formData)
+        this.setState({ booksData: newBooksData })
     }
 
     render () {
@@ -73,29 +70,6 @@ class Body extends Component {
                 />
             </div>
         )
-    }
-
-    initializeDB = () => {
-        IndexedDbWrapper.getAll('books', (booksData) => {
-            this.setState({ booksData })
-        })
-    }
-
-    initializeSW = () => {
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js')
-                .then ( () => {
-                    console.log('Service Worker registered successfully!')
-                })
-
-        } else {
-            console.log('Service Worker is not supported in your browser')
-        }
-    }
-
-    componentDidMount () {
-        IndexedDbWrapper.initialize(this.initializeDB)
-        this.initializeSW()
     }
 }
 

@@ -30,24 +30,24 @@ self.addEventListener('activate', (event) => {
     )
 })
 
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.open('bookskeep-cache')
-            .then (cache => {
-                return cache.match(event.request).then (response => {
-                    const urlsToCache = [
-                        '/dist/css/main.css',
-                        '/dist/js/bundle.js'
-                    ]
-                    if (response && urlsToCache.indexOf(event.request.url) > -1) {
-                        console.log('Cache hit! Fetching response from cache', event.request.url)
-                        return response
-                    }
-                    fetch(event.request).then (response => {
-                        cache.put(event.request, response.clone())
-                        return response
-                    })
-                })
-            })
-    )
-})
+// self.addEventListener('fetch', (event) => {
+//     event.respondWith(
+//         caches.open('bookskeep-cache')
+//             .then (cache => {
+//                 return cache.match(event.request).then (response => {
+//                     const urlsToCache = [
+//                         '/dist/css/main.css',
+//                         '/dist/js/bundle.js'
+//                     ]
+//                     if (response && urlsToCache.indexOf(event.request.url) > -1) {
+//                         console.log('Cache hit! Fetching response from cache', event.request.url)
+//                         return response
+//                     }
+//                     fetch(event.request).then (response => {
+//                         cache.put(event.request, response.clone())
+//                         return response
+//                     })
+//                 })
+//             })
+//     )
+// })

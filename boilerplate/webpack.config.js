@@ -67,6 +67,10 @@ module.exports = {
             {
                 from: './src/service-worker.js',
                 to: 'service-worker.js'
+            },
+            {
+                from: './src/images',
+                to: './images'
             }
         ])
     ]

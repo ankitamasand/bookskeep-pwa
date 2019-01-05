@@ -25,10 +25,5 @@ export const BooksHeaders = [
         displayName: 'Summary',
         apiKey: 'summary',
         width: GRIDSIZE.medium
-    },
-    {
-        displayName: 'Actions',
-        apiKey: 'actions',
-        width: GRIDSIZE.xsmall
     }
 ]
